@@ -57,7 +57,7 @@ function deleteEmployee() {
   }
   displayEmployees();
   updateBudget();
-}
+} // end deleteEmployees
 
 function displayEmployees() {
   $('tbody').empty();
