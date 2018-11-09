@@ -22,10 +22,15 @@
     <h3>Add Employee</h3>
     <input type="text" placeholder="first name" id="firstNameIn">
     <input type="text" placeholder="last name" id="lastNameIn">
-    <input type="number" placeholder="ID" id="idIn">
+    <input type="number" placeholder="ID" id="employeeIDIn">
     <input type="text" placeholder="title" id="titleIn">
-    <input type="number" placeholder="salary" id="salaryIn">
+    <input type="number" placeholder="salary" id="annualSalaryIn">
     <button id="addEmployeeButton" type="submit">Add Employee</button>
+    <br>
+    <br>
+    <h3>Delete Employee</h3>
+    <input type="number" placeholder="ID" id="deleteIDIn">
+    <button id="deleteEmployeeButton" type="submit">Delete Employee</button>
   </div>
   <br>
   <div class="container" id="outputDiv">
@@ -56,8 +61,9 @@
         </tr>
       </tbody>
     </table>
-    <br>
-    <h3>Total Monthly: $100,000</h3>
+  </div>
+  <br>
+  <div class="container" id="budgetDiv">
   </div>
 </body>
 
