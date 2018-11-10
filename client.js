@@ -55,6 +55,7 @@ function deleteEmployee() {
       employees.splice(i,1);
     }
   }
+  $('#deleteIDIn').val('');
   displayEmployees();
   updateBudget();
 } // end deleteEmployees
