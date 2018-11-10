@@ -48,16 +48,7 @@ function addEmployee() {
 } // end addEmployee
 
 function deleteEmployee() {
-  console.log('delete');
-  for (let i = 0; i < employees.length; i++) {
-    if ($('#deleteIDIn').val() == employees[i].employeeID) {
-      console.log(employees[i]);
-      employees.splice(i,1);
-    }
-  }
-  $('#deleteIDIn').val('');
-  displayEmployees();
-  updateBudget();
+  console.log('in delete function');
 } // end deleteEmployees
 
 function displayEmployees() {
@@ -68,9 +59,12 @@ function displayEmployees() {
       <td>${employee.lastName}</td>
       <td>${employee.employeeID}</td>
       <td>${employee.title}</td>
-      <td>$${employee.annualSalary.toLocaleString()}</td>
-    </tr>`);
-  }
+      <td>$${employee.annualSalary.toLocaleString()}</td>,
+      <td><button id="deleteEmployeeButton">test</button></td>
+      </tr>`);
+    }
+  // <td><a class="btn" id="deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
+
 } // end displayEmployees
 
 function updateBudget() {
@@ -81,7 +75,6 @@ function updateBudget() {
   // totalCost = totalCost.toLocaleString()
   $('#budgetDiv').empty();
   $('#budgetDiv').append(`<h3 id="budgetDisplay">Monthly Cost: $${totalCost.toLocaleString()}</h3>`);
-  console.log(totalCost);
   if (totalCost > 20000) {
     $('#budgetDisplay').addClass('negative');
   }

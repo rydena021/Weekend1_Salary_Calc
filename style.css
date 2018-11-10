@@ -1,3 +1,7 @@
 .negative {
   color: red;
 }
+thead {
+  background-color: #e9ecef;
+  color: #212529;
+}
