@@ -49,11 +49,14 @@ function addEmployee() {
 } // end addEmployee
 
 function deleteEmployee() {
-  console.log('in delete function');
-  let id = this.closest('tr');
-  id = $(id).find("td.id").text();
-  console.log(id);
-
+  let employeeID = $(this).closest('tr').find("td.id").text();
+  for (let i = 0; i < employees.length; i++) {
+    if (employeeID == employees[i].employeeID) {
+      employees.splice(i,1);
+    }
+  }
+  displayEmployees();
+  updateBudget();
 } // end deleteEmployees
 
 function displayEmployees() {
