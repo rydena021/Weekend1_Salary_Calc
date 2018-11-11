@@ -16,8 +16,9 @@ const robert = new Employee('Robert', 'Davis', 1111, 'Software Developer', 64000
 const mayella = new Employee('Mayella', 'Jones', 9874, 'HR', 51000);
 
 const employees = [atticus, jem, scout, robert, mayella];
-let monthlyBudget = 20000
-$(readyNow)
+let monthlyBudget = 20000;
+
+$(readyNow);
 
 function readyNow() {
   $('#addEmployeeButton').on('click', addEmployee);
@@ -49,6 +50,10 @@ function addEmployee() {
 
 function deleteEmployee() {
   console.log('in delete function');
+  let id = this.closest('tr');
+  id = $(id).find("td.id").text();
+  console.log(id);
+
 } // end deleteEmployees
 
 function displayEmployees() {
@@ -57,14 +62,15 @@ function displayEmployees() {
     $('tbody').append(`<tr>
       <td>${employee.firstName}</td>
       <td>${employee.lastName}</td>
-      <td>${employee.employeeID}</td>
+      <td class="id">${employee.employeeID}</td>
       <td>${employee.title}</td>
       <td>$${employee.annualSalary.toLocaleString()}</td>,
-      <td><button id="deleteEmployeeButton">test</button></td>
+      <td><a class="btn" id="deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
       </tr>`);
     }
-  // <td><a class="btn" id="deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
-
+  // remove all listeners and reapply
+  $('#deleteEmployeeButton').off();
+  $(document).on('click', "#deleteEmployeeButton", deleteEmployee);
 } // end displayEmployees
 
 function updateBudget() {
