@@ -28,25 +28,35 @@ function readyNow() {
 } // end readyNow
 
 function addEmployee() {
-  const newEmployee = new Employee(
-    $('#firstNameIn').val(),
-    $('#lastNameIn').val(),
-    parseInt($('#employeeIDIn').val()),
-    $('#titleIn').val(),
-    parseInt($('#annualSalaryIn').val())
-  );
-  // reset input fields
-  $('#firstNameIn').val('');
-  $('#lastNameIn').val('');
-  $('#employeeIDIn').val('');
-  $('#titleIn').val('');
-  $('#annualSalaryIn').val('');
-  // push to employees array
-  employees.push(newEmployee);
-  // dislay all employees
-  displayEmployees();
-  updateBudget();
+  if ($('#firstNameIn').val() === '' || $('#lastNameIn').val() === '' || $('#employeeIDIn').val() === '' || $('#titleIn').val() === '' || $('#annualSalaryIn').val() === '') {
+    alert("All fields mandatory.");
+  } else if (IDExists()) {
+    alert("Please enter a unique employee ID");
+  } else {
+    const newEmployee = new Employee(
+      $('#firstNameIn').val(),
+      $('#lastNameIn').val(),
+      parseInt($('#employeeIDIn').val()),
+      $('#titleIn').val(),
+      parseInt($('#annualSalaryIn').val())
+    );
+    // reset input fields
+    $('#firstNameIn').val('');
+    $('#lastNameIn').val('');
+    $('#employeeIDIn').val('');
+    $('#titleIn').val('');
+    $('#annualSalaryIn').val('');
+    // push to employees array
+    employees.push(newEmployee);
+    // dislay all employees
+    displayEmployees();
+    updateBudget();
+  }
 } // end addEmployee
+
+function currencyFormat(num) {
+  return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+} // end currencyFormat
 
 function deleteEmployee() {
   let employeeID = $(this).closest('tr').find("td.id").text();
@@ -67,7 +77,7 @@ function displayEmployees() {
       <td>${employee.lastName}</td>
       <td class="id">${employee.employeeID}</td>
       <td>${employee.title}</td>
-      <td>$${employee.annualSalary.toLocaleString()}</td>,
+      <td>${currencyFormat(employee.annualSalary)}</td>,
       <td><a class="btn" id="deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
       </tr>`);
     }
@@ -76,14 +86,22 @@ function displayEmployees() {
   $(document).on('click', "#deleteEmployeeButton", deleteEmployee);
 } // end displayEmployees
 
+function IDExists() {
+  for (const employee of employees) {
+    if ($('#employeeIDIn').val() == employee.employeeID) {
+      return true;
+    }
+  }
+  return false;
+} // end IDExists
+
 function updateBudget() {
   let totalCost = 0;
   for (const employee of employees) {
     totalCost += employee.monthlySalary;
   }
-  // totalCost = totalCost.toLocaleString()
   $('#budgetDiv').empty();
-  $('#budgetDiv').append(`<h3 id="budgetDisplay">Monthly Cost: $${totalCost.toLocaleString()}</h3>`);
+  $('#budgetDiv').append(`<h3 id="budgetDisplay" class="text-right">Monthly Cost: ${currencyFormat(totalCost)}</h3>`);
   if (totalCost > 20000) {
     $('#budgetDisplay').addClass('negative');
   }
