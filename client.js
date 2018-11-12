@@ -19,7 +19,6 @@ const employees = [atticus, jem, scout, robert, mayella];
 
 $(readyNow);
 
-
 function addEmployee() {
   if ($('#firstNameIn').val() === '' || $('#lastNameIn').val() === '' || $('#employeeIdIn').val() === '' || $('#titleIn').val() === '' || $('#annualSalaryIn').val() === '') {
     alert("All fields mandatory.");
@@ -33,15 +32,12 @@ function addEmployee() {
       $('#titleIn').val(),
       Number($('#annualSalaryIn').val())
       );
-      // reset input fields
       $('#firstNameIn').val('');
       $('#lastNameIn').val('');
       $('#employeeIdIn').val('');
       $('#titleIn').val('');
       $('#annualSalaryIn').val('');
-      // push to employees array
       employees.push(newEmployee);
-      // dislay all employees
       displayEmployees();
       updateBudget();
     }
@@ -76,7 +72,6 @@ function displayEmployees() {
     </tr>
     `);
   }
-  $('.deleteEmployeeButton').on('click', deleteEmployee);
 } // end displayEmployees
 
 function idIsValid() {
@@ -90,6 +85,7 @@ function idIsValid() {
 
 function readyNow() {
   $('#addEmployeeButton').on('click', addEmployee);
+  $('tbody').on('click', '.deleteEmployeeButton', deleteEmployee);
   displayEmployees();
   updateBudget();
 } // end readyNow
