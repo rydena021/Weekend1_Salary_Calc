@@ -16,7 +16,6 @@ const robert = new Employee('Robert', 'Davis', 1111, 'Software Developer', 64000
 const mayella = new Employee('Mayella', 'Jones', 9874, 'HR', 51000);
 
 const employees = [atticus, jem, scout, robert, mayella];
-let monthlyBudget = 20000;
 
 $(readyNow);
 
@@ -30,9 +29,9 @@ function addEmployee() {
     const newEmployee = new Employee(
       $('#firstNameIn').val(),
       $('#lastNameIn').val(),
-      parseInt($('#employeeIdIn').val()),
+      Number($('#employeeIdIn').val()),
       $('#titleIn').val(),
-      parseInt($('#annualSalaryIn').val())
+      Number($('#annualSalaryIn').val())
       );
       // reset input fields
       $('#firstNameIn').val('');
@@ -100,8 +99,7 @@ function updateBudget() {
   for (const employee of employees) {
     totalCost += employee.monthlySalary;
   }
-  $('#budgetDiv').empty();
-  $('#budgetDiv').append(`<h3 id="budgetDisplay" class="text-right">Monthly Cost: ${currencyFormat(totalCost)}</h3>`);
+  $('#budgetDisplay').text(`Monthly Cost: ${currencyFormat(totalCost)}`);
   if (totalCost > 20000) {
     $('#budgetDisplay').addClass('negative');
   }
