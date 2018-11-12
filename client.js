@@ -29,7 +29,7 @@ function readyNow() {
 function addEmployee() {
   if ($('#firstNameIn').val() === '' || $('#lastNameIn').val() === '' || $('#employeeIDIn').val() === '' || $('#titleIn').val() === '' || $('#annualSalaryIn').val() === '') {
     alert("All fields mandatory.");
-  } else if (IDExists()) {
+  } else if (!idIsValid()) {
     alert("Please enter a unique 4-digit employee ID.");
   } else {
     const newEmployee = new Employee(
@@ -85,16 +85,14 @@ function displayEmployees() {
   $(document).on('click', "#deleteEmployeeButton", deleteEmployee);
 } // end displayEmployees
 
-function IDExists() {
+function idIsValid() {
   for (const employee of employees) {
-    if ($('#employeeIDIn').val() == employee.employeeID) {
-      return true;
-    } else if ($('#employeeIDIn').val().length != 4 ) {
-      return true;
+    if ($('#employeeIDIn').val() == employee.employeeID || $('#employeeIDIn').val().length != 4) {
+      return false;
     }
   }
-  return false;
-} // end IDExists
+  return true;
+} // end idIsValid
 
 function updateBudget() {
   let totalCost = 0;
