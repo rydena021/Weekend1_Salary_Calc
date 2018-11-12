@@ -31,17 +31,17 @@ function addEmployee() {
       Number($('#employeeIdIn').val()),
       $('#titleIn').val(),
       Number($('#annualSalaryIn').val())
-      );
-      $('#firstNameIn').val('');
-      $('#lastNameIn').val('');
-      $('#employeeIdIn').val('');
-      $('#titleIn').val('');
-      $('#annualSalaryIn').val('');
-      employees.push(newEmployee);
-      displayEmployees();
-      updateBudget();
-    }
-  } // end addEmployee
+    );
+    $('#firstNameIn').val('');
+    $('#lastNameIn').val('');
+    $('#employeeIdIn').val('');
+    $('#titleIn').val('');
+    $('#annualSalaryIn').val('');
+    employees.push(newEmployee);
+    displayEmployees();
+    updateBudget();
+  }
+} // end addEmployee
 
 function currencyFormat(num) {
   return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -62,14 +62,14 @@ function displayEmployees() {
   $('tbody').empty();
   for (const employee of employees) {
     $('tbody').append(`
-    <tr>
-    <td>${employee.firstName}</td>
-    <td>${employee.lastName}</td>
-    <td class="id">${employee.employeeId}</td>
-    <td>${employee.title}</td>
-    <td>${currencyFormat(employee.annualSalary)}</td>,
-    <td><a class="btn deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
-    </tr>
+      <tr>
+        <td>${employee.firstName}</td>
+        <td>${employee.lastName}</td>
+        <td class="id">${employee.employeeId}</td>
+        <td>${employee.title}</td>
+        <td>${currencyFormat(employee.annualSalary)}</td>,
+        <td><a class="btn deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
+      </tr>
     `);
   }
 } // end displayEmployees
