@@ -1,10 +1,12 @@
-.negative {
-  color: red;
+body {
+  font-family: 'Cabin', sans-serif;
 }
+
 thead {
   background-color: #e9ecef;
   color: #212529;
 }
-body {
-  font-family: 'Cabin', sans-serif;
+
+.negative {
+  color: red;
 }

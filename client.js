@@ -22,7 +22,6 @@ $(readyNow);
 
 function readyNow() {
   $('#addEmployeeButton').on('click', addEmployee);
-  $('#deleteEmployeeButton').on('click', deleteEmployee);
   displayEmployees();
   updateBudget();
 } // end readyNow
@@ -31,7 +30,7 @@ function addEmployee() {
   if ($('#firstNameIn').val() === '' || $('#lastNameIn').val() === '' || $('#employeeIDIn').val() === '' || $('#titleIn').val() === '' || $('#annualSalaryIn').val() === '') {
     alert("All fields mandatory.");
   } else if (IDExists()) {
-    alert("Please enter a unique employee ID");
+    alert("Please enter a unique 4-digit employee ID.");
   } else {
     const newEmployee = new Employee(
       $('#firstNameIn').val(),
@@ -62,7 +61,7 @@ function deleteEmployee() {
   let employeeID = $(this).closest('tr').find("td.id").text();
   for (let i = 0; i < employees.length; i++) {
     if (employeeID == employees[i].employeeID) {
-      employees.splice(i,1);
+      employees.splice(i, 1);
     }
   }
   displayEmployees();
@@ -80,15 +79,17 @@ function displayEmployees() {
       <td>${currencyFormat(employee.annualSalary)}</td>,
       <td><a class="btn" id="deleteEmployeeButton"><i class="fas fa-trash-alt"></i></a></td>
       </tr>`);
-    }
+  }
   // remove all listeners and reapply
-  $('#deleteEmployeeButton').off();
+  $(document).off('click', "#deleteEmployeeButton", deleteEmployee);
   $(document).on('click', "#deleteEmployeeButton", deleteEmployee);
 } // end displayEmployees
 
 function IDExists() {
   for (const employee of employees) {
     if ($('#employeeIDIn').val() == employee.employeeID) {
+      return true;
+    } else if ($('#employeeIDIn').val().length != 4 ) {
       return true;
     }
   }
